@@ -32,7 +32,19 @@ function gadget:GameFrame(frame)
 
 		if unitID then
 			-- Make it attack everyone (set to aggressive stance)
-			Spring.GiveOrderToUnit(unitID, CMD.FIGHT, {}, {})
+			-- find a random enemy unit
+			local enemyUnitID = Spring.GetUnitNearestEnemy(unitID, 100000)
+			if enemyUnitID then
+				Spring.GiveOrderToUnit(unitID, CMD.ATTACK, {enemyUnitID}, {})
+			end
+		end
+
+		-- randomly select a unit that has no order and give it an attack order
+		local units = Spring.GetTeamUnits(gaiaTeamID)
+		local randomUnitID = units[math.random(1, #units)]
+		local enemyUnitID = Spring.GetUnitNearestEnemy(randomUnitID, 100000)
+		if enemyUnitID and randomUnitID and Spring.GetUnitCommandCount(randomUnitID) == 0 then
+			Spring.GiveOrderToUnit(randomUnitID, CMD.ATTACK, {enemyUnitID}, {})
 		end
 	end
 end
