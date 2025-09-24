@@ -1,13 +1,10 @@
 return {
-    name='mod test 2',
-    description='Your mod description',
+    name='sphere spawner mod',
+    description='spawns aggressive space spheres',
     version='v1.0.0',
-    shortname='YOURMOD',
-    mutator='0', -- or '1' if it's a mutator
+    shortname='sphere-spawner',
+    mutator='1',
     game='Beyond All Reason',
     shortGame='BAR',
     modtype=1,
-    depend = {
-        [[rapid://byar:stable]],
-    }
 }
